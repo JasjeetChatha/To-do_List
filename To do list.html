@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To do List</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/8e8dd102fa.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <div id="main">
+        <h1> My To do List</h1>
+        <!--add button -->
+      <h1><i onclick="popForm()" class="fa-regular fa-square-plus"></i></h1>
+        <ul id="myList"></ul>
+    </div>
+    <div id="TaskDetails">
+        <!--adding task form-->
+    <form>
+        <fieldset>
+            <legend>Add Task</legend>
+        <strong><label>Task Name</label></strong><br>
+        <input type="text" id="name" required><br><br>
+        <strong><label>Description</label></strong><br>
+        <input type="text" id="Desc"><br><br>
+        <strong><label>Due Date</label>
+        <input type="date" id="date"><br><br>
+        <strong><label>Time</label></strong>
+        <input type="time" id="time"><br><br>
+        <input type="submit" value="Add" onclick="task()">
+        <input type="submit" value="Close" onclick="cut()">
+    </fieldset>
+    </form>
+    <script>
+        //show the form to add task
+        function popForm(){
+            var show= document.getElementById("TaskDetails");
+            var background = document.getElementById("main");
+            show.style.display='flex';
+            show.style.backgroundColor='white';
+            background.style.filter='blur(2px)';
+        }
+        
+        function task() {
+            event.preventDefault();
+            //saving info enter in task form in variable
+            var tNameI = document.getElementById("name");
+            var DescriptionI = document.getElementById("Desc");
+            var TimeI = document.getElementById("time");
+            var DateI = document.getElementById("date");
+            //getting their actual value which will be shown
+            var tName = tNameI.value;
+            var Description = DescriptionI.value;
+            var Time = TimeI.value;
+            var Date = DateI.value;
+            if (Description===""){
+                Description="No Description";
+            }
+            if (Time===""){
+                Time="none";
+            }
+            if (Date===""){
+                Date="none";
+            }
+            //creating a list(li) element and saving in variable
+            const list = document.createElement("li");
+            //adding content to the list using inner.html
+            list.innerHTML='<h3>'+tName+'</h3><br><i> '+Description+' </i><br> Due At '+Time+' Due On '+Date;
+            //getting the list from html
+            const fList = document.getElementById('myList');
+            //adding list content to the list
+            fList.appendChild(list);
+            //resetting the form
+            var form = document.querySelector('form');
+    form.reset();
+            cut();
+            
+        }
+        function cut(){
+            //closing the form
+            var close= document.getElementById("TaskDetails");
+            //using css display to hide it
+            close.style.display='none';
+            //removing the background blur
+            var background = document.getElementById("main");
+            background.style.filter='none';
+        }
+        
+    </script>
+</body>
+</html>
